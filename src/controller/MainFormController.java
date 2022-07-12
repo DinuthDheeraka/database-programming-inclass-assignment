@@ -7,16 +7,24 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import util.Navigations;
+import view.tm.StudentTM;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class MainFormController {
-    public TableView studentTbl;
+public class MainFormController implements Initializable {
+    public TableView<StudentTM> studentTbl;
     public TableColumn colId;
     public TableColumn colName;
     public TableColumn colAddress;
@@ -32,6 +40,47 @@ public class MainFormController {
     public JFXTextField txtNic;
     public JFXButton addBtn;
     public JFXButton addNewStudentBtn;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        colId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+        colName.setCellValueFactory(new PropertyValueFactory("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory("address"));
+        colContact.setCellValueFactory(new PropertyValueFactory("contact"));
+        colNic.setCellValueFactory(new PropertyValueFactory("nic"));
+        colEmail.setCellValueFactory(new PropertyValueFactory("email"));
+
+        studentTbl.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if(newValue!=null)setSelectedStudentData(newValue);
+                });
+
+        setStudentTblData();
+    }
+
+    private void setSelectedStudentData(StudentTM newValue) {
+        txtId.setEditable(false);
+        addBtn.setText("UPDATE");
+        txtId.setText(newValue.getStudentId());
+        txtName.setText(newValue.getName());
+        txtAddress.setText(newValue.getAddress());
+        txtContact.setText(newValue.getContact());
+        txtEmail.setText(newValue.getEmail());
+        txtNic.setText(newValue.getNic());
+    }
+
+    private void setStudentTblData() {
+        try {
+            ObservableList<StudentTM> studentTMS = FXCollections.observableArrayList(
+                    StudentCrudController.getAllStudents()
+            );
+            studentTbl.setItems(studentTMS);
+        }
+        catch (SQLException|ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void addBtnOnAction(ActionEvent actionEvent) {
         if("ADD".equals(addBtn.getText())){
@@ -53,6 +102,7 @@ public class MainFormController {
                 new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
             }
         }
+        setStudentTblData();
     }
 
     public void searchBarOnAction(ActionEvent actionEvent) {
@@ -60,5 +110,13 @@ public class MainFormController {
 
     public void addNewStudentBtnOnAction(ActionEvent actionEvent) {
         addBtn.setText("ADD");
+    }
+
+    public void closeBtnOnAction(ActionEvent actionEvent) {
+        Navigations.getInstance().closeStage(actionEvent);
+    }
+
+    public void minimizeBtnOnAction(ActionEvent actionEvent) {
+        Navigations.getInstance().minimizeStage(actionEvent);
     }
 }
