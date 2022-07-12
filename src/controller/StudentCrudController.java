@@ -7,9 +7,11 @@ package controller;
 
 import javafx.scene.control.Alert;
 import util.CrudUtil;
+import view.tm.StudentTM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class StudentCrudController {
 
@@ -29,8 +31,15 @@ public class StudentCrudController {
         }
     }
 
-    public static void getAllStudents() throws SQLException, ClassNotFoundException {
+    public static ArrayList<StudentTM> getAllStudents() throws SQLException, ClassNotFoundException {
+        ArrayList<StudentTM> studentTMS = new ArrayList();
         ResultSet resultSet = CrudUtil.execute("SELECT * FROM Student");
-
+        while (resultSet.next()){
+            studentTMS.add(new StudentTM(
+                    resultSet.getString("student_id"),resultSet.getString("student_name"),resultSet.getString("email"),
+                    resultSet.getString("contact"),resultSet.getString("address"),resultSet.getString("nic")
+            ));
+        }
+        return studentTMS;
     }
 }
