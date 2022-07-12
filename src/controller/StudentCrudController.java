@@ -54,4 +54,12 @@ public class StudentCrudController {
         }
         return null;
     }
+
+    public static void deleteStudent(String studentId) throws SQLException, ClassNotFoundException {
+        if (CrudUtil.execute("DELETE FROM Student WHERE student_id=?",studentId)){
+            new Alert(Alert.AlertType.CONFIRMATION,"Student deleted").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR,"Couldn't delete student").show();
+        }
+    }
 }

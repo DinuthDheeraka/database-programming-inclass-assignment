@@ -42,6 +42,8 @@ public class MainFormController implements Initializable {
     public JFXButton addBtn;
     public JFXButton addNewStudentBtn;
 
+    private StudentTM selectedStudentTM;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
@@ -60,6 +62,7 @@ public class MainFormController implements Initializable {
     }
 
     private void setSelectedStudentData(StudentTM newValue) {
+        selectedStudentTM = newValue;
         txtId.setEditable(false);
         addBtn.setText("UPDATE");
         txtId.setText(newValue.getStudentId());
@@ -143,5 +146,15 @@ public class MainFormController implements Initializable {
 
     public void minimizeBtnOnAction(ActionEvent actionEvent) {
         Navigations.getInstance().minimizeStage(actionEvent);
+    }
+
+    public void deleteCtxmOnAction(ActionEvent actionEvent) {
+        try {
+            StudentCrudController.deleteStudent(selectedStudentTM.getStudentId());
+        }
+        catch (SQLException|ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        setStudentTblData();
     }
 }

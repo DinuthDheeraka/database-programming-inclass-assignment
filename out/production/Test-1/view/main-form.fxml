@@ -2,6 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -22,6 +24,13 @@
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#deleteCtxmOnAction" text="Delete" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
       </TableView>
       <JFXTextField fx:id="txtId" labelFloat="true" layoutX="14.0" layoutY="122.0" prefHeight="31.0" prefWidth="315.0" promptText="Student-Id">
          <font>
