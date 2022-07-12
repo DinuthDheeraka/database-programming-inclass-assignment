@@ -8,9 +8,12 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
+import java.sql.SQLException;
 
 public class MainFormController {
     public TableView studentTbl;
@@ -30,6 +33,25 @@ public class MainFormController {
     public JFXButton addBtn;
 
     public void addBtnOnAction(ActionEvent actionEvent) {
+        if("ADD".equals(addBtn.getText())){
+            try {
+                StudentCrudController.insertStudent(
+                        txtId.getText(),txtName.getText(),txtEmail.getText(), txtContact.getText(),txtAddress.getText(),txtNic.getText()
+                );
+            }
+            catch (SQLException|ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            }
+        }else{
+            try {
+                StudentCrudController.updateStudent(
+                        txtName.getText(),txtEmail.getText(), txtContact.getText(),txtAddress.getText(),txtNic.getText(),txtId.getText()
+                );
+            }
+            catch (SQLException|ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            }
+        }
     }
 
     public void searchBarOnAction(ActionEvent actionEvent) {
