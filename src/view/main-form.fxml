@@ -60,7 +60,7 @@
             <Font name="Arial Bold" size="19.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="1074.0" layoutY="14.0" onAction="#addBtnOnAction" prefHeight="57.0" prefWidth="325.0" style="-fx-background-color: #08d40f;" text="ADD+" textFill="WHITE">
+      <JFXButton fx:id="addNewStudentBtn" buttonType="RAISED" layoutX="1074.0" layoutY="14.0" onAction="#addNewStudentBtnOnAction" prefHeight="57.0" prefWidth="325.0" style="-fx-background-color: #08d40f;" text="ADD+" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="19.0" />
          </font>

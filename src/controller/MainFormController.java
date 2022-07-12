@@ -31,6 +31,7 @@ public class MainFormController {
     public JFXTextField txtEmail;
     public JFXTextField txtNic;
     public JFXButton addBtn;
+    public JFXButton addNewStudentBtn;
 
     public void addBtnOnAction(ActionEvent actionEvent) {
         if("ADD".equals(addBtn.getText())){
@@ -55,5 +56,9 @@ public class MainFormController {
     }
 
     public void searchBarOnAction(ActionEvent actionEvent) {
+    }
+
+    public void addNewStudentBtnOnAction(ActionEvent actionEvent) {
+        addBtn.setText("ADD");
     }
 }

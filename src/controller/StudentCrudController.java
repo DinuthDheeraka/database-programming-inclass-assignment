@@ -28,4 +28,9 @@ public class StudentCrudController {
             new Alert(Alert.AlertType.ERROR,"Couldn't update student").show();
         }
     }
+
+    public static void getAllStudents() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM Student");
+
+    }
 }
