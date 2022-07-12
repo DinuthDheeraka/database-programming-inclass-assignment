@@ -5,6 +5,7 @@
  */
 package controller;
 
+import entity.Student;
 import javafx.scene.control.Alert;
 import util.CrudUtil;
 import view.tm.StudentTM;
@@ -41,5 +42,16 @@ public class StudentCrudController {
             ));
         }
         return studentTMS;
+    }
+
+    public static Student searchStudentById(String studentId) throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM Student WHERE student_id=?",studentId);
+        if(resultSet.next()){
+            return new Student(
+                    resultSet.getString("student_id"),resultSet.getString("student_name"),resultSet.getString("email"),
+                    resultSet.getString("contact"),resultSet.getString("address"),resultSet.getString("nic")
+            );
+        }
+        return null;
     }
 }

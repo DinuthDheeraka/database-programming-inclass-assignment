@@ -7,6 +7,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import entity.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -106,9 +107,33 @@ public class MainFormController implements Initializable {
     }
 
     public void searchBarOnAction(ActionEvent actionEvent) {
+        try {
+            Student student = StudentCrudController.searchStudentById(searchBar.getText());
+            if(student!=null){
+                addBtn.setText("UPDATE");
+                txtId.setEditable(false);
+                txtId.setText(student.getStudentId());
+                txtNic.setText(student.getNic());
+                txtName.setText(student.getName());
+                txtAddress.setText(student.getAddress());
+                txtContact.setText(student.getContact());
+                txtEmail.setText(student.getEmail());
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Couldn't find student").show();
+            }
+        }
+        catch (SQLException|ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addNewStudentBtnOnAction(ActionEvent actionEvent) {
+        txtId.clear();
+        txtNic.clear();
+        txtEmail.clear();
+        txtContact.clear();
+        txtAddress.clear();
+        txtName.clear();
         addBtn.setText("ADD");
     }
 
