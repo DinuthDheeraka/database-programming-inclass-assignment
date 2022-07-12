@@ -1,0 +1,113 @@
+CREATE DATABASE IF NOT EXISTS ijse;
+USE ijse;
+
+CREATE TABLE IF NOT EXISTS Student(
+        student_id VARCHAR(45) PRIMARY KEY,
+	student_name VARCHAR(45),
+	email TEXT,
+	contact VARCHAR(20),
+	address TEXT,
+	nic VARCHAR(45)
+);
+
+CREATE TABLE IF NOT EXISTS Teacher(
+        teacher_id VARCHAR(45) PRIMARY KEY,
+	name VARCHAR(45),
+	nic VARCHAR(45),
+	contact VARCHAR(45),
+        address TEXT
+);
+
+CREATE TABLE IF NOT EXISTS Subject(
+        subject_id VARCHAR(45) PRIMARY KEY,
+	subject_name VARCHAR(45),
+	credit DOUBLE,
+	teacher_id VARCHAR(45),
+        FOREIGN KEY(teacher_id) REFERENCES Teacher(teacher_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Course(
+        course_id VARCHAR(45) PRIMARY KEY,
+	course_name VARCHAR(45),
+	cost DOUBLE,
+	duration VARCHAR(45),
+	subject_id VARCHAR(45),
+        FOREIGN KEY(subject_id) REFERENCES Subject(subject_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Intake(
+        intake_id VARCHAR(45) PRIMARY KEY,
+	start_date DATE,
+	intake_ecol VARCHAR(45),
+	description VARCHAR(45),
+	course_id VARCHAR(45),
+	FOREIGN KEY(course_id) REFERENCES Course(course_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS Registration(
+        registration_id VARCHAR(45) PRIMARY KEY,
+	reg_date DATE,
+	student_id VARCHAR(45),
+	intake_id VARCHAR(45),
+	FOREIGN KEY(intake_id) REFERENCES Intake(intake_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(student_id) REFERENCES Student(student_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Payment(
+        payment_id VARCHAR(45) PRIMARY KEY,
+	date DATE,
+	cost DOUBLE,
+	registration_id VARCHAR(45),
+	FOREIGN KEY(registration_id) REFERENCES Registration(registration_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
+
+INSERT INTO student VALUES ('ST-000','Dinuth Dheeraka','dinuth@gmail.com','0778987654','Kalutara North','200300801817');
+INSERT INTO student VALUES ('ST-001','Kaveen Kashmika','kaveen@gmail.com','0778985651','Kalutara South','200406801817');
+INSERT INTO student VALUES ('ST-002','Kasun Rajitha','kasun@gmail.com','0778967652','Galle','200307801817');
+INSERT INTO student VALUES ('ST-003','Jehan Perera','jehanh@gmail.com','0778974653','Colombo 05','200309881817');
+INSERT INTO student VALUES ('ST-004','Nimal Silva','nimal@gmail.com','0778989654','Galle','200300001817');
+
+
+INSERT INTO teacher VALUES ('TH-000','Kamal Perera','099877654321','0776565432','Panadura');
+INSERT INTO teacher VALUES ('TH-001','Amal Silva','199377654321','0716565432','Kalutara');
+INSERT INTO teacher VALUES ('TH-002','Malith Perera','499877654321','0723565432','Galle');
+INSERT INTO teacher VALUES ('TH-003','Ajith Silva','099879604321','0736575432','Colombo');
+INSERT INTO teacher VALUES ('TH-004','Sarath Fonseka','799867654321','0786565432','Panadura');
+
+
+INSERT INTO subject VALUES ('SB-000','PRF',100,'TH-000');
+INSERT INTO subject VALUES ('SB-001','DBMS',100,'TH-001');
+INSERT INTO subject VALUES ('SB-002','ORM',100,'TH-002');
+INSERT INTO subject VALUES ('SB-003','Internet technologies',100,'TH-003');
+INSERT INTO subject VALUES ('SB-004','Software Architectures',100,'TH-001');
+
+
+INSERT INTO course VALUES ('CS-000','GDSE',320000,'2 years','SB-000');
+INSERT INTO course VALUES ('CS-001','CMJD',320000,'6 months','SB-003');
+INSERT INTO course VALUES ('CS-002','RMAD',320000,'6 months','SB-002');
+INSERT INTO course VALUES ('CS-003','RWAD',320000,'6 months','SB-001');
+INSERT INTO course VALUES ('CS-004','DEP',320000,'1 year','SB-000');
+
+
+INSERT INTO intake VALUES ('IN-000','2022-01-01','not defined','Intake-1','CS-000');
+INSERT INTO intake VALUES ('IN-001','2022-01-02','not defined','Intake-2','CS-001');
+INSERT INTO intake VALUES ('IN-002','2022-01-03','not defined','Intake-3','CS-003');
+INSERT INTO intake VALUES ('IN-003','2022-01-04','not defined','Intake-4','CS-002');
+INSERT INTO intake VALUES ('IN-004','2022-01-05','not defined','Intake-5','CS-001');
+
+
+INSERT INTO registration VALUES ('RG-000','2022-01-01','ST-001','IN-000');
+INSERT INTO registration VALUES ('RG-001','2022-01-02','ST-000','IN-001');
+INSERT INTO registration VALUES ('RG-002','2022-01-03','ST-002','IN-002');
+INSERT INTO registration VALUES ('RG-003','2022-01-04','ST-003','IN-003');
+INSERT INTO registration VALUES ('RG-004','2022-01-05','ST-004','IN-004');
+
+INSERT INTO payment VALUES ('PM-000','2022-02-02',40000,'RG-000');
+INSERT INTO payment VALUES ('PM-001','2022-02-02',80000,'RG-001');
+INSERT INTO payment VALUES ('PM-002','2022-02-03',50000,'RG-000');
+INSERT INTO payment VALUES ('PM-003','2022-02-04',40000,'RG-002');
+INSERT INTO payment VALUES ('PM-004','2022-02-05',30000,'RG-004');
