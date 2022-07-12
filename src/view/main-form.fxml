@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="932.0" prefWidth="1407.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+   <children>
+      <TableView fx:id="studentTbl" layoutX="8.0" layoutY="392.0" prefHeight="533.0" prefWidth="1391.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="75.0" text="student_id" />
+          <TableColumn fx:id="colName" prefWidth="75.0" text="student_name" />
+            <TableColumn fx:id="colAddress" prefWidth="75.0" text="address" />
+            <TableColumn fx:id="colContact" prefWidth="75.0" text="contact" />
+            <TableColumn fx:id="colEmail" prefWidth="75.0" text="emial" />
+            <TableColumn fx:id="colNic" prefWidth="75.0" text="nic" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <JFXTextField fx:id="txtId" labelFloat="true" layoutX="14.0" layoutY="122.0" prefHeight="31.0" prefWidth="315.0" promptText="student_id">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtName" layoutX="364.0" layoutY="122.0" prefHeight="31.0" prefWidth="315.0" promptText="student_name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <TextField fx:id="searchBar" layoutX="8.0" layoutY="316.0" onAction="#searchBarOnAction" prefHeight="57.0" prefWidth="1391.0" style="-fx-background-radius: 20;" />
+      <JFXTextField fx:id="txtAddress" layoutX="716.0" layoutY="122.0" prefHeight="31.0" prefWidth="315.0" promptText="student_address">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtContact" layoutX="14.0" layoutY="206.0" prefHeight="31.0" prefWidth="315.0" promptText="student_contact">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtEmail" layoutX="364.0" layoutY="206.0" prefHeight="31.0" prefWidth="315.0" promptText="student_email">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtNic" layoutX="716.0" layoutY="206.0" prefHeight="31.0" prefWidth="315.0" promptText="student_nic">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="addBtn" buttonType="RAISED" layoutX="1074.0" layoutY="193.0" onAction="#addBtnOnAction" prefHeight="57.0" prefWidth="325.0" style="-fx-background-color: green;" text="UPDATE" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="19.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="1074.0" layoutY="14.0" onAction="#addBtnOnAction" prefHeight="57.0" prefWidth="325.0" style="-fx-background-color: #08d40f;" text="ADD+" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="19.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

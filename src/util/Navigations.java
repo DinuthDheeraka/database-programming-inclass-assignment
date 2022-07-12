@@ -34,7 +34,7 @@ public class Navigations {
     public void setNewStage(String location) throws IOException {
         Stage stage = new Stage();
         Scene scene = (new Scene(FXMLLoader.load(getClass().getResource
-                ("/lk/ijse/hms/view/"+location+".fxml"))));
+                ("../view/"+location+".fxml"))));
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
